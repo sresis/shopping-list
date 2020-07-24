@@ -77,8 +77,22 @@ def show_shopping_cart():
     #
     # Make sure your function can also handle the case wherein no cart has
     # been added to the session
+    melon_list = []
+    order_cost = 0
+    
+    ## find melon id and look up cost 
+    # add melon to list
+    for item in session['cart']:
+        melon_item = session['cart'].get(item)
+        melon_list.append(melon_item)
 
-    return render_template("cart.html")
+
+
+    # seperate loop to look up each melon that is in the list + find its cost
+
+
+    print("\n", melon_list, "\n")
+    return render_template("cart.html", melon_list=melon_list)
 
 
 @app.route("/add_to_cart/<melon_id>")
@@ -109,9 +123,7 @@ def add_to_cart(melon_id):
     # check if melon is in the cart already. If it is, increment value by 1
     # if not, add to dictionary
 
-    session['cart'] = {}
-
-    if session['cart'] != None:
+    if session.get('cart') != None:
         if session['cart'].get(melon_id):
             session['cart'][melon_id] += 1
             print(melon_message)
@@ -119,13 +131,9 @@ def add_to_cart(melon_id):
             session['cart'][melon_id] = 1
             print(melon_message)
     else:
+        session['cart'] = {}
         session['cart'][melon_id] = 1
         print(melon_message)
-
-
-
-
-
 
     return redirect("/cart")
 
