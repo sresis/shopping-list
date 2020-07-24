@@ -83,7 +83,7 @@ def show_shopping_cart():
     ## find melon id and look up cost 
     # add melon to list
     for item in session['cart']:
-        melon_item = session['cart'].get(item)
+        melon_item = melons.get_by_id(item)
         melon_list.append(melon_item)
 
 
@@ -91,8 +91,8 @@ def show_shopping_cart():
     # seperate loop to look up each melon that is in the list + find its cost
 
 
-    print("\n", melon_list, "\n")
-    return render_template("cart.html", melon_list=melon_list)
+  
+    return render_template("cart.html", melon_list=melon_list, melons = session['cart'])
 
 
 @app.route("/add_to_cart/<melon_id>")

@@ -15,9 +15,9 @@
         <tbody>
             {% for melon in melon_list %}
             <tr>
-                <td>{{ melon.name }}</td>
-                <td>"qty"</td>
-                <td>"price"</td>
+                <td>{{ melon.common_name }}</td>
+                <td> {{ melons[melon.melon_id] }} </td>
+                <td>{{ melon.price }}</td>
             </tr>
             {% endfor %}
         </tbody>
